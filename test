@@ -1,0 +1,209 @@
+pip install requests
+pip install jinja2
+
+
+import requests
+from jinja2 import Template
+
+# Function to make API call and extract information
+def get_api_data(api_url):
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"Failed to fetch data from API. Status code: {response.status_code}")
+
+# Function to render Jinja template
+def render_template(template_str, data):
+    template = Template(template_str)
+    return template.render(data)
+
+# Function to post content to Confluence
+def post_to_confluence(confluence_url, content):
+    # Assuming you have authentication and necessary headers set up
+    headers = {
+        "Content-Type": "application/json",
+        # Add your authentication headers here
+    }
+
+    data = {
+        "type": "page",
+        "title": "API Data Page",
+        "body": {
+            "storage": {
+                "value": content,
+                "representation": "storage",
+            }
+        },
+    }
+
+    response = requests.post(confluence_url, json=data, headers=headers)
+
+    if response.status_code == 200:
+        print("Content posted to Confluence successfully!")
+    else:
+        print(f"Failed to post content to Confluence. Status code: {response.status_code}")
+
+# API URL
+api_url = "https://api.example.com/data"
+
+# Confluence URL
+confluence_url = "https://confluence.example.com/rest/api/content/PAGE_ID"
+
+# Jinja template
+template_str = """
+<h2>{{ title }}</h2>
+<p>{{ description }}</p>
+"""
+
+# Gather data from API
+api_data = get_api_data(api_url)
+
+# Render template with API data
+rendered_content = render_template(template_str, api_data)
+
+# Post content to Confluence
+post_to_confluence(confluence_url, rendered_content)
+
+
+import requests
+from jinja2 import Template
+
+# Function to make API call and extract information
+def get_api_data(api_url):
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"Failed to fetch data from API. Status code: {response.status_code}")
+
+# Function to render Jinja template
+def render_template(template_str, data):
+    template = Template(template_str)
+    return template.render(data)
+
+# Function to post content to Confluence
+def post_to_confluence(confluence_url, content):
+    # Assuming you have authentication and necessary headers set up
+    headers = {
+        "Content-Type": "application/json",
+        # Add your authentication headers here
+    }
+
+    data = {
+        "type": "page",
+        "title": "API Data Page",
+        "body": {
+            "storage": {
+                "value": content,
+                "representation": "storage",
+            }
+        },
+    }
+
+    response = requests.post(confluence_url, json=data, headers=headers)
+
+    if response.status_code == 200:
+        print("Content posted to Confluence successfully!")
+    else:
+        print(f"Failed to post content to Confluence. Status code: {response.status_code}")
+
+# API URL
+api_url = "https://api.example.com/data"
+
+# Confluence URL
+confluence_url = "https://confluence.example.com/rest/api/content/PAGE_ID"
+
+# Jinja template
+template_str = """
+<h2>{{ title }}</h2>
+<p>{{ description }}</p>
+"""
+
+# Gather data from API
+api_data = get_api_data(api_url)
+
+# Render template with API data
+rendered_content = render_template(template_str, api_data)
+
+# Post content to Confluence
+post_to_confluence(confluence_url, rendered_content)
+
+
+import requests
+from jinja2 import Template
+
+# Function to make API call and extract information
+def get_api_data(api_url):
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"Failed to fetch data from API. Status code: {response.status_code}")
+
+# Function to render Jinja template
+def render_template(template_str, data):
+    template = Template(template_str)
+    return template.render(data)
+
+# Function to post content to Confluence
+def post_to_confluence(confluence_url, content):
+    # Assuming you have authentication and necessary headers set up
+    headers = {
+        "Content-Type": "application/json",
+        # Add your authentication headers here
+    }
+
+    data = {
+        "type": "page",
+        "title": "API Data Page",
+        "body": {
+            "storage": {
+                "value": content,
+                "representation": "storage",
+            }
+        },
+    }
+
+    response = requests.post(confluence_url, json=data, headers=headers)
+
+    if response.status_code == 200:
+        print("Content posted to Confluence successfully!")
+    else:
+        print(f"Failed to post content to Confluence. Status code: {response.status_code}")
+
+# API URL
+api_url = "https://api.example.com/data"
+
+# Confluence URL
+confluence_url = "https://confluence.example.com/rest/api/content/PAGE_ID"
+
+# Jinja template with a table
+template_str = """
+<h2>{{ title }}</h2>
+<p>{{ description }}</p>
+
+<table border="1">
+  <tr>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <!-- Add more columns as needed -->
+  </tr>
+  {% for item in data %}
+    <tr>
+      <td>{{ item.column1 }}</td>
+      <td>{{ item.column2 }}</td>
+      <!-- Add more columns as needed -->
+    </tr>
+  {% endfor %}
+</table>
+"""
+
+# Gather data from API
+api_data = get_api_data(api_url)
+
+# Render template with API data
+rendered_content = render_template(template_str, {"title": "API Data", "description": "Data from the API", "data": api_data})
+
+# Post content to Confluence
+post_to_confluence(confluence_url, rendered_content)
